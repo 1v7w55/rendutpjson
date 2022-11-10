@@ -8,11 +8,11 @@ export default function componentDidMount() {
       "My-Custom-Header": "foobar",
     },
     body: JSON.stringify({
-      brand: brands,
-      model: models,
-      years: years,
-      kms: kms,
-      price: prices,
+      brand: this.brands,
+      model: this.models,
+      years: this.years,
+      kms: this.kms,
+      price: this.prices,
     }),
   };
   fetch("http://localhost:5000/cars", requestOptions)
@@ -34,7 +34,7 @@ export default function componentDidMount() {
 
   return (
     <form>
-      <label for="brands">brands</label>
+      <label brands="brands">brands</label>
       <input type="text" name="brands" id="brands" />
 
       <button type="submit">Submit</button>

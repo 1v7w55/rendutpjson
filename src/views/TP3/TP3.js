@@ -47,7 +47,7 @@ export default function Cart() {
         ListItem={TP3}
         AddForm={CartForm}
       />
-      <componentDidMount/>
+      {/* <componentDidMount/> */}
       
     </>
 
