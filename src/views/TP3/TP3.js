@@ -1,7 +1,7 @@
 import ListContainer from "../../components/ListContainer";
 import { useEffect, useState } from "react";
 import CartForm from "./TP3form";
-import CartItem from "../Tp1V2/Cart/CartItem";
+
 function TP3({ item }) {
   return (
     <>
@@ -11,10 +11,26 @@ function TP3({ item }) {
     </>
   );
 }
+function componentDidMount() {
+  // POST request using fetch with set headers
+  const requestOptions = {
+      method: 'POST',
+      headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer my-token',
+          'My-Custom-Header': 'foobar'
+      },
+      body: JSON.stringify({ title: 'React POST Request Example' })
+  };
+  fetch('http://localhost:5000/cars', requestOptions)
+      .then(response => response.json())
+      .then(data => this.setState({ postId: data.id }));
+}
+
 
 export default function Cart() {
   const [products, setProducts] = useState([]);
-
+  
   useEffect(() => {
     fetch("http://localhost:5000/cars")
       .then((response) => response.json())
@@ -31,6 +47,10 @@ export default function Cart() {
         ListItem={TP3}
         AddForm={CartForm}
       />
+      <componentDidMount/>
+      
     </>
+
+    
   );
 }
