@@ -1,5 +1,4 @@
 export default function componentDidMount() {
-  // POST request using fetch with set headers
   const requestOptions = {
     method: "POST",
     headers: {
