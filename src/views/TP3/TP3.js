@@ -5,9 +5,14 @@ import CartForm from "./TP3form";
 function TP3({ item }) {
   return (
     <>
-      <div>
-      {item.model} ({item.brand}) année: {item.years} km: {item.kms} prix: {item.price}€ -
-    </div>
+      <li>{item.model} ({item.brand})
+      <ul>
+      <li>année: {item.years} </li>
+      <li>km: {item.kms}</li> 
+      <li>prix: {item.price}€ </li>
+      <button>Supprimer {item.id}</button>
+      </ul>
+      </li>
     </>
   );
 }
@@ -25,13 +30,14 @@ export default function Cart() {
 
   return (
     <>
+    <ul>
       <ListContainer
         initialItems={products}
         ListItem={TP3}
         AddForm={CartForm}
       />
       {/* <componentDidMount/> */}
-      
+      </ul>
     </>
 
     
