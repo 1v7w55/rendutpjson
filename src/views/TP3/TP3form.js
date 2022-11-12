@@ -1,37 +1,51 @@
 import React from "react";
 export default function TP3form() {
-    const asyncPostCall = async () => {
-    const rawResponse = await fetch("http://localhost:5000/cars", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ 
-        brand: "BRANDS", 
-        model: "MODEL",
-        years:2021,
-        kms: 0,
-        price: 0,
-         }),
-    });
-    const content = await rawResponse.json();
-
-    console.log(content);
-};
+const form1 = document.querySelector('.form');
+if(form1){
+form1.addEventListener('submit', event => {
+  event.preventDefault();
+  const formData = new FormData(form1);
+  const data = Object.fromEntries(formData);
+  
+  fetch('http://localhost:5000/cars', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  }).then(res=>res.json())
+  .then(data=>console.log(data))
+  .then(error=>console.log(error))
+});
+}
   return (
-    <form >
-      <label for="model">
-        <strong>First Name:</strong>
-        <input type="text" name="model" id="model" />
-      </label>
-
+    <form class="form">
       <label for="brand">
-        Last Name:
-        <input type="text" name="brand" id="brand" />
+        <strong>BRAND</strong>
+        <input type="text" name="brand" placeholder="brand" />
       </label>
-
-      <input type="submit" onClick={asyncPostCall} value="Create new user" />
+    <br></br>
+      <label for="model">
+        MODEL
+        <input type="text" name="model" placeholder="model" />
+      </label>
+      <br></br>
+      <label for="years">
+        YEARS
+        <input type="number" name="years" placeholder="years" />
+      </label>
+      <br></br>
+      <label for="kms">
+        KMS
+        <input type="number" name="kms" placeholder="kms" />
+      </label>
+      <br></br>
+      <label for="price">
+        PRICE
+        <input type="number" name="price" placeholder="price" />
+      </label>
+      <br></br>
+      <button type="submit">Submit</button>
     </form>
   );
 }

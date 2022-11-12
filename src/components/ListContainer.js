@@ -45,7 +45,7 @@ export default function ListContainer({
       {availableActions.add && <AddForm onSubmit={listeners.add} />}
       {items.map(
         (item) =>
-          console.log(item, item[keyProp]) || (
+          (
             <ListItem
               key={item[keyProp]}
               item={item}
