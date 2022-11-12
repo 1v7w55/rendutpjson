@@ -1,42 +1,37 @@
-export default function componentDidMount() {
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer my-token",
-      "My-Custom-Header": "foobar",
-    },
-    body: JSON.stringify({
-      brand: this.brands,
-      model: this.models,
-      years: this.years,
-      kms: this.kms,
-      price: this.prices,
-    }),
-  };
-  fetch("http://localhost:5000/cars", requestOptions)
-    .then((response) => response.json())
-    .then((data) => this.setState({ postId: data.id }));
+import React from "react";
+export default function TP3form() {
+    const asyncPostCall = async () => {
+    const rawResponse = await fetch("http://localhost:5000/cars", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+        brand: "BRANDS", 
+        model: "MODEL",
+        years:2021,
+        kms: 0,
+        price: 0,
+         }),
+    });
+    const content = await rawResponse.json();
 
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const data = new FormData(event.target);
-
-    const value = data.get("brands");
-
-    console.log({ value });
-  }
-
-  const form = document.querySelector("form");
-  form.addEventListener("submit", handleSubmit);
-
+    console.log(content);
+};
   return (
-    <form>
-      <label brands="brands">brands</label>
-      <input type="text" name="brands" id="brands" />
+    <form >
+      <label for="model">
+        <strong>First Name:</strong>
+        <input type="text" name="model" id="model" />
+      </label>
 
-      <button type="submit">Submit</button>
+      <label for="brand">
+        Last Name:
+        <input type="text" name="brand" id="brand" />
+      </label>
+
+      <input type="submit" onClick={asyncPostCall} value="Create new user" />
     </form>
   );
 }
