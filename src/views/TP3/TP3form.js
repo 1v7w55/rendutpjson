@@ -1,5 +1,6 @@
 import React from "react";
 export default function TP3form() {
+var url = "http://localhost:5000/cars";
 const form1 = document.querySelector('.form');
 if(form1){
 form1.addEventListener('submit', event => {
@@ -7,7 +8,7 @@ form1.addEventListener('submit', event => {
   const formData = new FormData(form1);
   const data = Object.fromEntries(formData);
   
-  fetch('http://localhost:5000/cars', {
+  fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

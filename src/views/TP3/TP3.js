@@ -1,6 +1,15 @@
 import ListContainer from "../../components/ListContainer";
 import { useEffect, useState } from "react";
 import CartForm from "./TP3form";
+var url = "http://localhost:5000/cars";
+function deleteData(item) {
+  return fetch(url + '/' + item, {
+    method: 'DELETE'
+  })
+  .then(response => response.json());
+}
+
+
 function TP3({ item }) {
   return (
     <>
@@ -9,7 +18,7 @@ function TP3({ item }) {
       <li>année: {item.years} </li>
       <li>km: {item.kms}</li> 
       <li>prix: {item.price}€ </li>
-      <button>Supprimer {item.id}</button>
+      <button onClick={() => deleteData(item.id)}>Supprimer l'item {item.id}</button>
       </ul>
       </li>
     </>
@@ -26,7 +35,6 @@ export default function Cart() {
         setProducts(data);
       });
   }, []);
-
   return (
     <>
     <ul>
